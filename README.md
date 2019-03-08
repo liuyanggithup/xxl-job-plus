@@ -9,6 +9,7 @@ Xxl-Job是在Xxl-Job 2.0.1 release版本的基础上开发的。
 
 ## Xxl-Job-Plus新增功能
 Xxl-Job-Plus是Xxl-Job的一个超集，这意味着它拥有着Xxl-Job可以提供的所有功能，当你需要以下功能时，可以选择xxl-job-plus。
+> 需要把该项目xxl-job-core模块打包到公司的maven私服，不能使用 maven 中央仓库的代码。
 #### 用户管理
   - 完善登录功能，使用数据库表存储用户，而不再是原来xxl-job自带的配置文件配置单一用户的模式。
   - 提供用户管理功能，有管理员和普通用户两种角色。
@@ -22,3 +23,4 @@ Xxl-Job-Plus是Xxl-Job的一个超集，这意味着它拥有着Xxl-Job可以提
   
 #### 阻塞策略
   - 增加阻塞策略：丢弃后续调度返回成功。该策略与丢弃后续调度的区别是，当任务阻塞时会直接返回成功。在调度日志中点击调度备注-查看，msg为block strategy effect：Discard Return Success 的是触发该策略的调度记录。
+  
