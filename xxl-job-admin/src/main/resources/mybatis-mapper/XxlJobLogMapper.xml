@@ -178,9 +178,9 @@
 		FROM
 			XXL_JOB_QRTZ_TRIGGER_LOG AS t
 		WHERE
-			job_id = 1
+			job_id = #{jobId}
 		AND handle_code != 200
-		AND DATE_FORMAT(NOW(), '%Y%m%d') = DATE_FORMAT(trigger_time, '%Y%m%d')
+		AND DATE_FORMAT(NOW(), '%Y%m%d%H') = DATE_FORMAT(trigger_time, '%Y%m%d%H')
 	</select>
 
 

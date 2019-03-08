@@ -171,7 +171,7 @@ public class JobFailMonitorHelper {
 		//如果当天失败超过N次，不告警
 		int maxErrorCountAlarm = XxlJobAdminConfig.getAdminConfig().getMaxErrorCountAlarm();
 		int errorCountByJobId = XxlJobAdminConfig.getAdminConfig().getXxlJobLogDao().errorCountByJobId(info.getId());
-		if(maxErrorCountAlarm > 0 && errorCountByJobId > maxErrorCountAlarm){
+		if(maxErrorCountAlarm > 0 && errorCountByJobId >= maxErrorCountAlarm){
 			logger.info(">>>>>>>>>>> job errorCount too much, job failAlarm cancel, JobLogId:{}", info.getId());
 			return;
 		}
