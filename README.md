@@ -3,13 +3,16 @@ Xxl-Job是一款优秀的开源调度平台，在推广并使用的过程中，�
 
 ## 版本关系
 Xxl-Job是在Xxl-Job 2.0.1 release版本的基础上开发的。
+
 ## Documentation
+> Xxl-Job-Plus适合Xxl-Job的老用户，对Xxl-Job有一定使用经验，在熟悉Xxl-Job文档的基础上上手Xxl-Job-Plus。
 - [中文文档](http://www.xuxueli.com/xxl-job/)
 - [English Documentation](http://www.xuxueli.com/xxl-job/en/)
 
 ## Xxl-Job-Plus新增功能
 Xxl-Job-Plus是Xxl-Job的一个超集，这意味着它拥有着Xxl-Job可以提供的所有功能，当你需要以下功能时，可以选择xxl-job-plus。
 > 需要把该项目xxl-job-core模块打包到公司的maven私服，不能使用 maven 中央仓库的JAR包。
+
 #### 用户管理
   - 完善登录功能（初始化用户名：admin 初始化密码：123456），使用数据库表存储用户，而不再是原来xxl-job自带的配置文件配置单一用户的模式。
   - 提供用户管理功能，有管理员和普通用户两种角色。
