@@ -8,7 +8,8 @@ public enum ExecutorBlockStrategyEnum {
     SERIAL_EXECUTION("Serial execution"),
     /*CONCURRENT_EXECUTION("并行"),*/
     DISCARD_LATER("Discard Later"),
-    COVER_EARLY("Cover Early");
+    COVER_EARLY("Cover Early"),
+    DISCARD_RETURN_SUCCESS("Discard Return Success");
 
     private String title;
     private ExecutorBlockStrategyEnum (String title) {

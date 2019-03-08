@@ -1,6 +1,7 @@
 package com.xxl.job.core.biz.impl;
 
 import com.xxl.job.core.biz.ExecutorBiz;
+import com.xxl.job.core.biz.model.HandleCallbackParam;
 import com.xxl.job.core.biz.model.LogResult;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.biz.model.TriggerParam;
@@ -13,6 +14,7 @@ import com.xxl.job.core.handler.impl.GlueJobHandler;
 import com.xxl.job.core.handler.impl.ScriptJobHandler;
 import com.xxl.job.core.log.XxlJobFileAppender;
 import com.xxl.job.core.thread.JobThread;
+import com.xxl.job.core.thread.TriggerCallbackThread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -156,7 +158,13 @@ public class ExecutorBizImpl implements ExecutorBiz {
 
                     jobThread = null;
                 }
-            } else {
+            } else if(ExecutorBlockStrategyEnum.DISCARD_RETURN_SUCCESS == blockStrategy){
+
+                if(jobThread.isRunningOrHasQueue()){
+                    TriggerCallbackThread.pushCallBack(new HandleCallbackParam(triggerParam.getLogId(), triggerParam.getLogDateTim(),new ReturnT<String>(200, ExecutorBlockStrategyEnum.DISCARD_RETURN_SUCCESS.getTitle())));
+                    return new ReturnT<String>(ReturnT.SUCCESS_CODE, "block strategy effect："+ExecutorBlockStrategyEnum.DISCARD_RETURN_SUCCESS.getTitle());
+                }
+            }else {
                 // just queue trigger
             }
         }
