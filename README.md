@@ -2,7 +2,7 @@
 Xxl-Job是一款优秀的开源调度平台，在推广并使用的过程中，我在它的基础上进行了扩展，开发了一些它本身无法满足我们公司业务需求的功能，提供了异构系统（PHP,Python等）接入的方案和实施样例，并完善了用户权限模型等等。
 
 ## 版本关系
-Xxl-Job是在Xxl-Job 2.0.1 release版本的基础上开发的。
+Xxl-Job-Plus是在Xxl-Job 2.0.1 release版本的基础上开发的。
 
 ## Documentation
 > Xxl-Job-Plus适合Xxl-Job的老用户，对Xxl-Job有一定使用经验，在熟悉Xxl-Job文档的基础上上手Xxl-Job-Plus。
