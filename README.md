@@ -29,3 +29,7 @@ Xxl-Job-Plus是Xxl-Job的一个超集，这意味着它拥有着Xxl-Job可以提
 #### 阻塞策略
   - 增加阻塞策略：丢弃后续调度返回成功。该策略与丢弃后续调度的区别是，当任务阻塞时会直接返回成功。在调度日志中点击调度备注-查看，msg为block strategy effect：Discard Return Success 的是触发该策略的调度记录。
   
+  
+## 技术交流
+
+> QQ群：721567149
