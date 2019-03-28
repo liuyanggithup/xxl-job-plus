@@ -1,11 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.xuxueli</groupId>
-	<artifactId>xxl-job</artifactId>
-	<version>2.0.1.plus</version>
+	<groupId>com.githup.liuyanggithup</groupId>
+	<artifactId>xxl-job-plus</artifactId>
+	<version>1.0.0</version>
 	<packaging>pom</packaging>
-
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
 	<name>${project.artifactId}</name>
 	<description>A lightweight distributed task scheduling framework.</description>
 	<url>http://www.xuxueli.com/</url>
@@ -66,15 +70,15 @@
 	<scm>
 		<tag>master</tag>
 		<url>https://github.com/xuxueli/xxl-job.git</url>
-		<connection>scm:git:https://github.com/xuxueli/xxl-job.git</connection>
-		<developerConnection>scm:git:git@github.com:xuxueli/xxl-job.git</developerConnection>
+		<connection>scm:git:https://github.com/liuyanggithup/xxl-job-plus.git</connection>
+		<developerConnection>scm:git:git@github.com:liuyanggithup/xxl-job-plus.git</developerConnection>
 	</scm>
 	<developers>
 		<developer>
 			<id>XXL</id>
-			<name>xuxueli</name>
-			<email>931591021@qq.com</email>
-			<url>https://github.com/xuxueli</url>
+			<name>seventeen</name>
+			<email>516694849@qq.com</email>
+			<url>https://github.com/liuyanggithup</url>
 		</developer>
 	</developers>
 
