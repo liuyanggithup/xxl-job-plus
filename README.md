@@ -9,6 +9,15 @@ Xxl-Job-Plus是在Xxl-Job 2.0.1 release版本的基础上开发的。
 - [中文文档](http://www.xuxueli.com/xxl-job/)
 - [English Documentation](http://www.xuxueli.com/xxl-job/en/)
 
+## 执行器Maven依赖包
+> 下载对应的version版本
+```
+<dependency>
+     <groupId>com.githup.liuyanggithup</groupId>
+     <artifactId>xxl-job-core</artifactId>
+     <version>${version}</version>
+</dependency>
+```
 ## Xxl-Job-Plus新增功能
 Xxl-Job-Plus是Xxl-Job的一个超集，这意味着它拥有着Xxl-Job可以提供的所有功能，当你需要以下功能时，可以选择xxl-job-plus。
 > 需要把该项目xxl-job-core模块打包到公司的maven私服，不能使用 maven 中央仓库的JAR包。
