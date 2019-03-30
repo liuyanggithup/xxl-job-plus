@@ -19,8 +19,7 @@ Xxl-Job-Plus是在Xxl-Job 2.0.1 release版本的基础上开发的。
 </dependency>
 ```
 ## Xxl-Job-Plus新增功能
-Xxl-Job-Plus是Xxl-Job的一个超集，这意味着它拥有着Xxl-Job可以提供的所有功能，当你需要以下功能时，可以选择xxl-job-plus。
-> 需要把该项目xxl-job-core模块打包到公司的maven私服，不能使用 maven 中央仓库的JAR包。
+> Xxl-Job-Plus是Xxl-Job的一个超集，这意味着它拥有着Xxl-Job可以提供的所有功能，当你需要以下功能时，可以选择xxl-job-plus。
 
 #### 用户管理
 > 参考doc/java任务调度.pdf
@@ -33,7 +32,7 @@ Xxl-Job-Plus是Xxl-Job的一个超集，这意味着它拥有着Xxl-Job可以提
   - 普通用户权限以执行器为粒度进行权限管理，可以再用户管理页面对用户授予某执行器及该执行器下任务的查看权限。
 
 #### 告警优化
-  - 按照小时维度限制发送告警邮件的次数，超过xxl.job.maxErrorCountAlarm配置次数后不发送。
+  - 每个job按照小时维度限制发送告警邮件的次数，超过xxl.job.maxErrorCountAlarm配置次数后不发送。
   
 #### 阻塞策略
   - 增加阻塞策略：丢弃后续调度返回成功。该策略与丢弃后续调度的区别是，当任务阻塞时会直接返回成功。在调度日志中点击调度备注-查看，msg为block strategy effect：Discard Return Success 的是触发该策略的调度记录。
