@@ -195,7 +195,7 @@
         Powered by <b>XXL-JOB-PLUS</b> ${I18n.admin_version}
         <div class="pull-right hidden-xs">
             <strong>Copyright &copy; 2015-${.now?string('yyyy')} &nbsp;
-                <a href="http://www.xuxueli.com/" target="_blank" >xuxueli xxl-job 2.0.1升级版</a>
+                <a href="https://github.com/liuyanggithup/xxl-job-plus" target="_blank" >xuxueli xxl-job 2.0.1升级版</a>
             </strong><!-- All rights reserved. -->
         </div>
     </footer>
