@@ -14,12 +14,18 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
-
+/**
+ * 跨平台任务，异构语言开发HTTP接口，curl方式调用，经过实践检验的解决方案
+ * @author seventeen
+ * @date 2019/03/26
+ */
 @JobHandler(value = "curlJobHandler")
 @Component
 public class CurlJobHandler extends IJobHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CurlJobHandler.class);
+
+    public static final String INDEX_OF = "?";
 
     @Resource
     private XxlJobConfig xxlJobConfig;
@@ -41,7 +47,7 @@ public class CurlJobHandler extends IJobHandler {
         String signKey = xxlJobConfig.getSignKey();
         Long timestamp = System.currentTimeMillis();
         String sign = Md5Utils.md5(timestamp+signKey);
-        if(param.indexOf("?") == -1){
+        if(param.indexOf(INDEX_OF) == -1){
             param += "?timestamp="+timestamp+"&sign="+sign;
         }else {
             param += "&timestamp="+timestamp+"&sign="+sign;
