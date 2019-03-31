@@ -15,7 +15,7 @@ Xxl-Job-Plus是在Xxl-Job 2.0.1 release版本的基础上开发的。
 <dependency>
      <groupId>com.githup.liuyanggithup</groupId>
      <artifactId>xxl-job-core</artifactId>
-     <version>1.0.0</version>
+     <version>${version}</version>
 </dependency>
 ```
 ## Xxl-Job-Plus新增功能
