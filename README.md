@@ -10,7 +10,7 @@ Xxl-Job-Plus是在Xxl-Job 2.0.1 release版本的基础上开发的。
 - [English Documentation](http://www.xuxueli.com/xxl-job/en/)
 
 ## 执行器Maven依赖包
-> 下载对应的version版本
+> 下载对应的version版本,建议1.2.0
 ```
 <dependency>
      <groupId>com.githup.liuyanggithup</groupId>
