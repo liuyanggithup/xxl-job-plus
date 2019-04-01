@@ -38,7 +38,7 @@ Xxl-Job-Plus是在Xxl-Job 2.0.1 release版本的基础上开发的。
   - 增加阻塞策略：丢弃后续调度返回成功。该策略与丢弃后续调度的区别是，当任务阻塞时会直接返回成功。在调度日志中点击调度备注-查看，msg为block strategy effect：Discard Return Success 的是触发该策略的调度记录。
   
 #### 跨平台支持
-  - 部署跨平台执行器,使用CurlJobHandler,以curl http接口的方式执行。xxl-job本身提供的HttpHandler和CommandHandler解决大任务（执行时间超长）时难以支持。推荐使用CurlHandler,经过实践检验的解决方案。
+  - 部署跨平台执行器,使用CurlJobHandler,以curl http接口的方式执行。xxl-job本身提供的HttpJobHandler和CommandJobHandler解决大任务（执行时间超长）时难以支持。推荐使用CurlJobHandler,经过实践检验的解决方案。
   
 ## 技术交流
 
