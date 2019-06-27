@@ -13,7 +13,7 @@
 	<@netCommon.commonHeader />
 	<!-- left -->
 	<@netCommon.commonLeft "index" />
-	
+
 	<!-- Content Wrapper. Contains page content -->
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
@@ -41,7 +41,7 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">${I18n.job_dashboard_job_num}</span>
-                            <span class="info-box-number">${jobInfoCount}</span>
+                            <span class="info-box-number" id="jobInfoCountId"></span>
 
                             <div class="progress">
                                 <div class="progress-bar" style="width: 100%"></div>
@@ -57,17 +57,14 @@
                         <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
 
                         <div class="info-box-content">
-                            <span class="info-box-text">${I18n.job_dashboard_trigger_num}</span>
-                            <span class="info-box-number">${jobLogCount}</span>
+                            <span class="info-box-text">${I18n.job_dashboard_log_num}</span>
+                            <span class="info-box-number" id="jobLogCountId"></span>
 
                             <div class="progress">
                                 <div class="progress-bar" style="width: 100%" ></div>
                             </div>
                             <span class="progress-description">
-                                ${I18n.job_dashboard_trigger_num_tip}
-                                <#--<#if jobLogCount gt 0>
-                                    调度成功率：${(jobLogSuccessCount*100/jobLogCount)?string("0.00")}<small>%</small>
-                                </#if>-->
+                                ${I18n.job_dashboard_log_num_tip}
                             </span>
                         </div>
                     </div>
@@ -80,7 +77,7 @@
 
                         <div class="info-box-content">
                             <span class="info-box-text">${I18n.job_dashboard_jobgroup_num}</span>
-                            <span class="info-box-number">${executorCount}</span>
+                            <span class="info-box-number" id="executorCountId"></span>
 
                             <div class="progress">
                                 <div class="progress-bar" style="width: 100%"></div>
@@ -132,7 +129,7 @@
 		<!-- /.content -->
 	</div>
 	<!-- /.content-wrapper -->
-	
+
 	<!-- footer -->
 	<@netCommon.commonFooter />
 </div>

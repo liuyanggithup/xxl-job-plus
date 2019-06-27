@@ -35,12 +35,16 @@ public class IndexController {
 	private LoginService loginService;
 
 	@RequestMapping("/")
-	public String index(Model model) {
-
-		Map<String, Object> dashboardMap = xxlJobService.dashboardInfo();
-		model.addAllAttributes(dashboardMap);
+	public String index() {
 
 		return "index";
+	}
+
+	@RequestMapping("/dashboardMap")
+	@ResponseBody
+	public ReturnT<Map<String, Object>> dashboardMap(Date startDate, Date endDate) {
+		Map<String, Object> dashboardMap = xxlJobService.dashboardInfo();
+		return new ReturnT<>(dashboardMap);
 	}
 
     @RequestMapping("/chartInfo")
@@ -87,7 +91,7 @@ public class IndexController {
 		}
 		return ReturnT.SUCCESS;
 	}
-	
+
 	@RequestMapping("/help")
 	public String help() {
 
@@ -104,5 +108,5 @@ public class IndexController {
 		dateFormat.setLenient(false);
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 	}
-	
+
 }

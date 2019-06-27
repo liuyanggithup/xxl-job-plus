@@ -71,6 +71,33 @@ $(function () {
         });
     }
 
+    function dashboardMapInit() {
+
+        $.ajax({
+            type : 'POST',
+            url : base_url + '/dashboardMap',
+            data : {
+            },
+            dataType : "json",
+            success : function(data){
+                if (data.code == 200) {
+                   $("#jobLogCountId").text(data.content.jobLogCount);
+                   $("#jobInfoCountId").text(data.content.jobInfoCount);
+                   $("#executorCountId").text(data.content.executorCount);
+                } else {
+                    layer.open({
+                        title: I18n.system_tips ,
+                        btn: [ I18n.system_ok ],
+                        content: (data.msg || I18n.job_dashboard_report_loaddata_fail ),
+                        icon: '2'
+                    });
+                }
+            }
+        });
+
+    }
+
+    dashboardMapInit();
     /**
      * line Chart Init
      */
