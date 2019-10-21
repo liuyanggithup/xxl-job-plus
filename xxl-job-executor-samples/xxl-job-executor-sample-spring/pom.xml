@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.githup.liuyanggithup</groupId>
 		<artifactId>xxl-job-executor-samples</artifactId>
-		<version>1.2.0</version>
+		<version>1.2.1</version>
 	</parent>
 	<artifactId>xxl-job-executor-sample-spring</artifactId>
 	<packaging>war</packaging>
@@ -27,7 +27,7 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j-api.version}</version>
 		</dependency>
-		
+
 		<!-- xxl-job-core -->
 		<dependency>
 			<groupId>com.githup.liuyanggithup</groupId>
