@@ -172,7 +172,11 @@ CREATE TABLE `XXL_JOB_QRTZ_TRIGGER_INFO` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `XXL_JOB_QRTZ_TRIGGER_LOG` (
+/******************************************/
+/*   DatabaseName = xxl_job   */
+/*   TableName = xxl_job_qrtz_trigger_log   */
+/******************************************/
+CREATE TABLE `xxl_job_qrtz_trigger_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `job_group` int(11) NOT NULL COMMENT '执行器主键ID',
   `job_id` int(11) NOT NULL COMMENT '任务，主键ID',
@@ -188,8 +192,13 @@ CREATE TABLE `XXL_JOB_QRTZ_TRIGGER_LOG` (
   `handle_code` int(11) NOT NULL COMMENT '执行-状态',
   `handle_msg` text COMMENT '执行-日志',
   PRIMARY KEY (`id`),
-  KEY `I_trigger_time` (`trigger_time`)
+  KEY `I_job_id` (`job_id`),
+  KEY `I_job_group_id` (`job_group`,`job_id`),
+  KEY `I_handle_code` (`handle_code`),
+  KEY `I_trigger_code` (`trigger_code`),
+  KEY `I_trigger_time` (`trigger_time`) USING HASH
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE `XXL_JOB_QRTZ_TRIGGER_LOGGLUE` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
