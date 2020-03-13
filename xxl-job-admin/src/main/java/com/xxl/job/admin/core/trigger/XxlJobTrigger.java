@@ -19,6 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.EOFException;
 import java.util.Date;
 
 /**
@@ -28,6 +29,7 @@ import java.util.Date;
 public class XxlJobTrigger {
     private static Logger logger = LoggerFactory.getLogger(XxlJobTrigger.class);
 
+    private static final int EOF_RETRY_TIME = 3;
     /**
      * trigger job
      *
@@ -187,8 +189,20 @@ public class XxlJobTrigger {
     public static ReturnT<String> runExecutor(TriggerParam triggerParam, String address){
         ReturnT<String> runResult = null;
         try {
-            ExecutorBiz executorBiz = XxlJobDynamicScheduler.getExecutorBiz(address);
-            runResult = executorBiz.run(triggerParam);
+            int i = 0;
+            while (i < EOF_RETRY_TIME) {
+                try {
+                    ExecutorBiz executorBiz = XxlJobDynamicScheduler.getExecutorBiz(address);
+                    runResult = executorBiz.run(triggerParam);
+                    break;
+                } catch (EOFException e) {
+                    i++;
+                    logger.warn(">>>>>>>> xxl-job trigger EOFException, retry {}, please check if the executor[{}] is running.", i, address);
+                    if (i >= EOF_RETRY_TIME) {
+                        throw e;
+                    }
+                }
+            }
         } catch (Exception e) {
             logger.error(">>>>>>>>>>> xxl-job trigger error, please check if the executor[{}] is running.", address, e);
             runResult = new ReturnT<String>(ReturnT.FAIL_CODE, ThrowableUtil.toString(e));
