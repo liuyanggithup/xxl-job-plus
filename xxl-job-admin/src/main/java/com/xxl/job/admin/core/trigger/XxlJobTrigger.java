@@ -14,12 +14,11 @@ import com.xxl.job.core.biz.model.TriggerParam;
 import com.xxl.job.core.enums.ExecutorBlockStrategyEnum;
 import com.xxl.job.core.util.IpUtil;
 import com.xxl.rpc.util.ThrowableUtil;
+import com.xxl.rpc.util.XxlRpcException;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.EOFException;
 import java.util.Date;
 
 /**
@@ -196,10 +195,15 @@ public class XxlJobTrigger {
                     runResult = executorBiz.run(triggerParam);
                     i++;
                     break;
-                } catch (EOFException e) {
-                    i++;
-                    logger.warn(">>>>>>>> xxl-job trigger EOFException, retry {}, please check if the executor[{}] is running.", i, address);
-                    if (i >= EOF_RETRY_TIME) {
+                } catch (XxlRpcException e) {
+                    String xxlRpcExceptionMsg = ThrowableUtil.toString(e);
+                    if (xxlRpcExceptionMsg.contains("java.io.EOFException:")) {
+                        i++;
+                        logger.warn(">>>>>>>> xxl-job trigger EOFException, retry {}, please check if the executor[{}] is running.", i, address);
+                        if (i >= EOF_RETRY_TIME) {
+                            throw e;
+                        }
+                    }else {
                         throw e;
                     }
                 }
