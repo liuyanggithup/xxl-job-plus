@@ -194,6 +194,7 @@ public class XxlJobTrigger {
                 try {
                     ExecutorBiz executorBiz = XxlJobDynamicScheduler.getExecutorBiz(address);
                     runResult = executorBiz.run(triggerParam);
+                    i++;
                     break;
                 } catch (EOFException e) {
                     i++;
