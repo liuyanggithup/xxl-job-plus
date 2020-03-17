@@ -40,6 +40,8 @@ public interface XxlJobLogDao {
 	
 	public int delete(@Param("jobId") int jobId);
 
+	public int deleteById(@Param("id") int id);
+
 	public int triggerCountByHandleCode(@Param("handleCode") int handleCode);
 
 	public int errorCountByJobId(@Param("jobId") int jobId);

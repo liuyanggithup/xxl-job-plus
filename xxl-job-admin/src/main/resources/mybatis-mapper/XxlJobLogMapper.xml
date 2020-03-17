@@ -162,6 +162,12 @@
 		WHERE job_id = #{jobId}
 	</delete>
 
+	<delete id="deleteById" parameterType="int" >
+		delete from XXL_JOB_QRTZ_TRIGGER_LOG
+		WHERE id = #{id}
+	</delete>
+
+
 	<select id="triggerCountByHandleCode" resultType="int" >
 		SELECT count(1)
 		FROM XXL_JOB_QRTZ_TRIGGER_LOG AS t

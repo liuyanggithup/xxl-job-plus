@@ -57,6 +57,8 @@ public class XxlJobAdminConfig implements InitializingBean{
     @Value("${xxl.job.maxErrorCountAlarm}")
     private int maxErrorCountAlarm;
 
+    @Value("${xxl.job.trigger.log.retention.days}")
+    private int triggerLogRetentionDays;
     // dao, service
 
     @Resource
@@ -127,4 +129,7 @@ public class XxlJobAdminConfig implements InitializingBean{
         return adminBiz;
     }
 
+    public int getTriggerLogRetentionDays() {
+        return triggerLogRetentionDays;
+    }
 }

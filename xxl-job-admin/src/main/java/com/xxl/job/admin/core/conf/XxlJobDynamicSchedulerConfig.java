@@ -1,6 +1,7 @@
 package com.xxl.job.admin.core.conf;
 
 import com.xxl.job.admin.core.schedule.XxlJobDynamicScheduler;
+import com.xxl.job.admin.core.schedule.XxlJobSelfScheduler;
 import org.quartz.Scheduler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,5 +40,14 @@ public class XxlJobDynamicSchedulerConfig {
 
         return xxlJobDynamicScheduler;
     }
+
+    @Bean(initMethod = "start")
+    public XxlJobSelfScheduler getXxlJobSelfScheduler(SchedulerFactoryBean schedulerFactory){
+        Scheduler scheduler = schedulerFactory.getScheduler();
+        XxlJobSelfScheduler xxlJobSelfScheduler = new XxlJobSelfScheduler();
+        xxlJobSelfScheduler.setScheduler(scheduler);
+        return xxlJobSelfScheduler;
+    }
+
 
 }

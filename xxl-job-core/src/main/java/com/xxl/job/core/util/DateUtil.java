@@ -2,6 +2,7 @@ package com.xxl.job.core.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -27,4 +28,38 @@ public class DateUtil {
     public static Date parse(String textDate) throws ParseException {
         return threadLocal.get().parse(textDate);
     }
+
+    /**
+     * 给定的时间再加上指定分钟数
+     */
+    public static Date getAddMinuteDate(Date dt, int minutes) {
+        if (dt == null) {
+            dt = new Date(System.currentTimeMillis());
+        }
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dt);
+        cal.add(Calendar.MINUTE, minutes);
+
+        return cal.getTime();
+    }
+
+    public static Date getMinusDayDate(Date dt, int days) {
+        if (dt == null) {
+            dt = new Date(System.currentTimeMillis());
+        }
+
+        int hours = days * 24;
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dt);
+        cal.add(Calendar.HOUR, -hours);
+
+        return cal.getTime();
+    }
+
+    public static void main(String[] args) {
+        Date minusDayDate = DateUtil.getMinusDayDate(new Date(), 7);
+        System.out.println(minusDayDate);
+    }
+
 }
