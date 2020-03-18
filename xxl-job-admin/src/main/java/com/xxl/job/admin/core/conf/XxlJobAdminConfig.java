@@ -1,9 +1,7 @@
 package com.xxl.job.admin.core.conf;
 
-import com.xxl.job.admin.dao.XxlJobGroupDao;
-import com.xxl.job.admin.dao.XxlJobInfoDao;
-import com.xxl.job.admin.dao.XxlJobLogDao;
-import com.xxl.job.admin.dao.XxlJobRegistryDao;
+import com.xxl.job.admin.core.model.XxlJobTriggerReport;
+import com.xxl.job.admin.dao.*;
 import com.xxl.job.core.biz.AdminBiz;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
@@ -70,6 +68,8 @@ public class XxlJobAdminConfig implements InitializingBean{
     @Resource
     public XxlJobGroupDao xxlJobGroupDao;
     @Resource
+    public XxlJobTriggerReportDao xxlJobTriggerReportDao;
+    @Resource
     public AdminBiz adminBiz;
 
 
@@ -123,6 +123,10 @@ public class XxlJobAdminConfig implements InitializingBean{
 
     public XxlJobGroupDao getXxlJobGroupDao() {
         return xxlJobGroupDao;
+    }
+
+    public XxlJobTriggerReportDao getXxlJobTriggerReportDao() {
+        return xxlJobTriggerReportDao;
     }
 
     public AdminBiz getAdminBiz() {

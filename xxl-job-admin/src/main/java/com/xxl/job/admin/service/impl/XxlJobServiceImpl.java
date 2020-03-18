@@ -1,19 +1,19 @@
 package com.xxl.job.admin.service.impl;
 
+import com.xxl.job.admin.biz.XxlJobTriggerLogBiz;
 import com.xxl.job.admin.core.model.XxlJobGroup;
 import com.xxl.job.admin.core.model.XxlJobInfo;
+import com.xxl.job.admin.core.model.XxlJobTriggerReport;
 import com.xxl.job.admin.core.model.XxlJobUser;
 import com.xxl.job.admin.core.route.ExecutorRouteStrategyEnum;
 import com.xxl.job.admin.core.schedule.XxlJobDynamicScheduler;
 import com.xxl.job.admin.core.util.I18nUtil;
-import com.xxl.job.admin.dao.XxlJobGroupDao;
-import com.xxl.job.admin.dao.XxlJobInfoDao;
-import com.xxl.job.admin.dao.XxlJobLogDao;
-import com.xxl.job.admin.dao.XxlJobLogGlueDao;
+import com.xxl.job.admin.dao.*;
 import com.xxl.job.admin.service.XxlJobService;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.enums.ExecutorBlockStrategyEnum;
 import com.xxl.job.core.glue.GlueTypeEnum;
+import com.xxl.job.core.util.DateUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -23,10 +23,12 @@ import org.quartz.SchedulerException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.text.MessageFormat;
+import java.text.ParseException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -45,6 +47,8 @@ public class XxlJobServiceImpl implements XxlJobService {
 	public XxlJobLogDao xxlJobLogDao;
 	@Resource
 	private XxlJobLogGlueDao xxlJobLogGlueDao;
+	@Resource
+	private XxlJobTriggerReportDao xxlJobTriggerReportDao;
 	@Resource
 	private LoginService loginService;
 	
@@ -284,8 +288,7 @@ public class XxlJobServiceImpl implements XxlJobService {
 	public Map<String, Object> dashboardInfo() {
 
 		int jobInfoCount = xxlJobInfoDao.findAllCount();
-		int jobLogCount = xxlJobLogDao.triggerCountByHandleCode(-1);
-		int jobLogSuccessCount = xxlJobLogDao.triggerCountByHandleCode(ReturnT.SUCCESS_CODE);
+		int jobLogCount = xxlJobLogDao.countMaxId();
 
 		// executor count
 		Set<String> executerAddressSet = new HashSet<String>();
@@ -304,7 +307,6 @@ public class XxlJobServiceImpl implements XxlJobService {
 		Map<String, Object> dashboardMap = new HashMap<String, Object>();
 		dashboardMap.put("jobInfoCount", jobInfoCount);
 		dashboardMap.put("jobLogCount", jobLogCount);
-		dashboardMap.put("jobLogSuccessCount", jobLogSuccessCount);
 		dashboardMap.put("executorCount", executorCount);
 		return dashboardMap;
 	}
@@ -328,15 +330,24 @@ public class XxlJobServiceImpl implements XxlJobService {
 		int triggerCountSucTotal = 0;
 		int triggerCountFailTotal = 0;
 
-		List<Map<String, Object>> triggerCountMapAll = xxlJobLogDao.triggerCountByDay(startDate, endDate);
-		if (CollectionUtils.isNotEmpty(triggerCountMapAll)) {
-			for (Map<String, Object> item: triggerCountMapAll) {
-				String day = String.valueOf(item.get("triggerDay"));
-				int triggerDayCount = Integer.valueOf(String.valueOf(item.get("triggerDayCount")));
-				int triggerDayCountRunning = Integer.valueOf(String.valueOf(item.get("triggerDayCountRunning")));
-				int triggerDayCountSuc = Integer.valueOf(String.valueOf(item.get("triggerDayCountSuc")));
-				int triggerDayCountFail = triggerDayCount - triggerDayCountRunning - triggerDayCountSuc;
+		List<XxlJobTriggerReport> xxlJobTriggerReports = xxlJobTriggerReportDao.selectByDay(DateUtil.format(startDate, DateUtil.DAY_DATE_FORMAT),
+				DateUtil.format(endDate, DateUtil.DAY_DATE_FORMAT));
 
+		Date date = new Date();
+		if (date.getTime()>=startDate.getTime() && date.getTime() <= endDate.getTime()) {
+			XxlJobTriggerReport xxlJobTriggerReport = XxlJobTriggerLogBiz.triggerCountByDay(date);
+			if(xxlJobTriggerReport != null){
+				xxlJobTriggerReports.add(xxlJobTriggerReport);
+			}
+
+		}
+
+		if (CollectionUtils.isNotEmpty(xxlJobTriggerReports)) {
+			for (XxlJobTriggerReport xxlJobTriggerReport: xxlJobTriggerReports) {
+				String day = xxlJobTriggerReport.getDay();
+				int triggerDayCountRunning = xxlJobTriggerReport.getTriggerDayCountRunning();
+				int triggerDayCountSuc = xxlJobTriggerReport.getTriggerDayCountSuc();
+				int triggerDayCountFail = xxlJobTriggerReport.getTriggerDayCountFail();
 				triggerDayList.add(day);
 				triggerDayCountRunningList.add(triggerDayCountRunning);
 				triggerDayCountSucList.add(triggerDayCountSuc);

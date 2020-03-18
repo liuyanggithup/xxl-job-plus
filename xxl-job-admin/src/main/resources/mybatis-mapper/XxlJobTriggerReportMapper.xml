@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xxl.job.admin.dao.XxlJobTriggerReportDao">
+    <resultMap id="BaseResultMap" type="com.xxl.job.admin.core.model.XxlJobTriggerReport">
+        <result column="day" property="day"/>
+        <result column="trigger_day_count" property="triggerDayCount"/>
+        <result column="trigger_day_count_running" property="triggerDayCountRunning"/>
+        <result column="trigger_day_count_suc" property="triggerDayCountSuc"/>
+        <result column="trigger_day_count_fail" property="triggerDayCountFail"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+      day, trigger_day_count, trigger_day_count_running, trigger_day_count_suc, trigger_day_count_fail
+    </sql>
+
+
+    <select id="selectByDay" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM XXL_JOB_QRTZ_TRIGGER_REPORT
+        WHERE day BETWEEN #{startDay} AND #{endDay}
+    </select>
+
+    <delete id="delete">
+        DELETE FROM XXL_JOB_QRTZ_TRIGGER_REPORT
+        WHERE day = #{day}
+    </delete>
+
+    <insert id="save" parameterType="com.xxl.job.admin.core.model.XxlJobTriggerReport">
+        INSERT INTO XXL_JOB_QRTZ_TRIGGER_REPORT (
+        day,
+        trigger_day_count,
+        trigger_day_count_running,
+        trigger_day_count_suc,
+        trigger_day_count_fail
+        ) VALUES (
+        #{day},
+        #{triggerDayCount},
+        #{triggerDayCountRunning},
+        #{triggerDayCountSuc},
+        #{triggerDayCountFail}
+        )
+    </insert>
+
+</mapper>

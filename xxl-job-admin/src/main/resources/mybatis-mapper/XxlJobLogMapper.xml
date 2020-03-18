@@ -178,6 +178,11 @@
 		</trim>
 	</select>
 
+	<select id="countMaxId" resultType="int">
+		SELECT IFNULL(MAX(id), 0)
+		FROM XXL_JOB_QRTZ_TRIGGER_LOG
+	</select>
+
 	<select id="errorCountByJobId" resultType="int" parameterType="int">
 		SELECT
 			count(1)

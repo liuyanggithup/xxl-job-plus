@@ -13,6 +13,8 @@ import java.util.Date;
 public class DateUtil {
     private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
+    public static final String DAY_DATE_FORMAT = "yyyy-MM-dd";
+
     private static ThreadLocal<SimpleDateFormat> threadLocal = new ThreadLocal<SimpleDateFormat>() {
         @Override
         protected synchronized SimpleDateFormat initialValue() {
@@ -23,6 +25,10 @@ public class DateUtil {
 
     public static String format(Date date) {
         return threadLocal.get().format(date);
+    }
+
+    public static String format(Date date, String pattern) {
+        return new SimpleDateFormat(pattern).format(date);
     }
 
     public static Date parse(String textDate) throws ParseException {

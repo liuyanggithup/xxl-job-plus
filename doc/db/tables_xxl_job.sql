@@ -246,23 +246,18 @@ INSERT INTO `XXL_JOB_QRTZ_TRIGGER_INFO`(`id`, `job_group`, `job_cron`, `job_desc
 
 ALTER TABLE `XXL_JOB_QRTZ_TRIGGER_LOG` ADD INDEX I_job_id (`job_id`);
 
+CREATE TABLE `XXL_JOB_QRTZ_TRIGGER_REPORT` (
+    `day` varchar(64) NOT NULL COMMENT '日期',
+    `trigger_day_count` int(11) NOT NULL COMMENT '总执行次数',
+    `trigger_day_count_running` int(11) NOT NULL COMMENT '进行中数量',
+    `trigger_day_count_suc` int(11) NOT NULL COMMENT '成功执行数量',
+    `trigger_day_count_fail` int(11) NOT NULL COMMENT '失败执行数量',
+    KEY `I_day` (`day`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8
 
 commit;
 
 
-select * from xxl_job_qrtz_trigger_info
-where id in (
-    SELECT
-	DISTINCT(job_id)
-    FROM XXL_JOB_QRTZ_TRIGGER_LOG
-    WHERE
-        job_group = 6
-    AND TIMESTAMPDIFF(
-        SECOND,
-        trigger_time,
-        handle_time
-    ) > 60
-)
 
-alter table XXL_JOB_QRTZ_TRIGGER_LOG rename to XXL_JOB_QRTZ_TRIGGER_LOG_20200310001;
-create table XXL_JOB_QRTZ_TRIGGER_LOG like  XXL_JOB_QRTZ_TRIGGER_LOG_20200310001;
+
+

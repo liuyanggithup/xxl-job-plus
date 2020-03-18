@@ -36,9 +36,8 @@ public class CleanTriggerLogJobBean extends QuartzJobBean {
     @Override
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
+        logger.info(">>>>> xxl-job, clean trigger log job...");
         Date time = new Date();
-        logger.info(">>>>> xxl-job, clean trigger log job, time {}", DateUtil.format(time));
-
         int triggerLogRetentionDays = XxlJobAdminConfig.getAdminConfig().getTriggerLogRetentionDays();
         //triggerLogRetentionDays <= 0 不清理
         if (triggerLogRetentionDays <= 0) {

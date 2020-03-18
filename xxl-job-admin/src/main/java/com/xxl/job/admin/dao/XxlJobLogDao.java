@@ -44,6 +44,8 @@ public interface XxlJobLogDao {
 
 	public int triggerCountByHandleCode(@Param("handleCode") int handleCode);
 
+	public int countMaxId();
+
 	public int errorCountByJobId(@Param("jobId") int jobId);
 
 	public List<Map<String, Object>> triggerCountByDay(@Param("from") Date from,
